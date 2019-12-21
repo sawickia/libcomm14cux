@@ -1,5 +1,5 @@
 # ft232r\_prog #
-As an alternative to the Windows-only [FT\_PROG utility from FTDI](http://www.ftdichip.com/Support/Utilities.htm#FT_Prog), the Linux utility [ft232r\_prog](http://rtr.ca/ft232r/) can be used to perform the same function. This allows Linux users to invert the FTDI converter's RXD line without any dependence on Windows.
+As an alternative to the Windows-only [FT\_PROG utility from FTDI](https://www.ftdichip.com/Support/Utilities.htm#FT_PROG), the Linux utility [ft232r\_prog](http://rtr.ca/ft232r/) can be used to perform the same function. This allows Linux users to invert the FTDI converter's RXD line without any dependence on Windows.
 
 ## Building from source ##
 To build ft232r\_prog from source, first ensure that you have GNU Make, gcc, and libftdi installed (along with the libftdi development headers.) If using Ubuntu, this can be done with:
