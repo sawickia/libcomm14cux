@@ -40,7 +40,7 @@ The TTS connector pin numbers in the table above are only important if you've ma
 
 ![14CUX TTS Data Link Connector](https://colinbourassa.github.io/car_stuff/images/14cux_tts_data_link_connector_vehicle-side.png)
 
-If you **are** using a TTS connector on the FTDI cable, the back of the connector shell will look like the photo below when it's wired correctly. Note the 390Ω resistor between pins 4 and 5 (click photo to enlarge):
+If you **are** using a TTS connector on the FTDI cable, the back of the connector shell will look like the photo below when it's wired correctly. Note the 390Ω resistor between pins 4 and 5:
 
 ![FTDI cable with TTS connector](https://colinbourassa.github.io/car_stuff/images/ftdi_with_tts_rear.jpg)
 
@@ -50,7 +50,7 @@ That's it. The cable should now allow this software to communicate with the 14CU
 
 This section explains the reasons behind the unusual signalling characteristics of the 14CUX serial port. The output from the microprocessor (MPU) in the 14CUX's ECU looks like this:
 
-!(https://colinbourassa.github.io/car_stuff/images/14cux_serial_schematic.png)
+![14CUX serial schematic](https://colinbourassa.github.io/car_stuff/images/14cux_serial_schematic.png)
 
 The Q10 transistor acts like a switch. When the signal from the MPU is high (5V), the switch is ON and the low side of `R150` is shunted to ground, so Pin 9 is zero volts. When the MPU signal goes low, the switch is OFF and the low side of `R150` is pulled up, so Pin 9 goes to 12V. This transistor circuit is designed to buffer and protect the MPU signal, but it also inverts and changes the voltage level. This is why the FTDI USB device must have its RxD signal inverted (to match the 14CUX's inverted TxD.) However, because the FTDI converter is a 5V device, the 12V signal from the ECU must be attenuated with an external resistor to prevent damage. I've found that the 5V signal from the FTDI converter is sufficient to drive the RxD line in the 14CUX.
 
