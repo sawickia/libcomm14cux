@@ -1,4 +1,4 @@
-_This is a mirror of the information in [my personal webspace](http://alum.wpi.edu/~colinb/14cux_protocol.html)._
+_This is a mirror of the information in [my personal webspace](https://colinbourassa.github.io)._
 
 # Software protocol #
 
