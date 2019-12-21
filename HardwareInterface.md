@@ -1,4 +1,4 @@
-_This is a mirror of the information in [my personal webspace](http://alum.wpi.edu/~colinb/mems_interface.html)._
+_This is a mirror of the information in [my personal webspace](https://colinbourassa.github.io)._
 
 # Hardware interface #
 
@@ -12,9 +12,9 @@ On the cables I've used, the Tx and Rx lines were orange and yellow, respectivel
 
 Once you have the FTDI cable, it's a good idea to test it with a loopback: short the Tx and Rx lines, connect the USB end to a PC, and start a terminal emulator (such as [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/), if you're running Windows.) Be sure to turn off local echo, and any characters you type should appear in the terminal.
 
-Then, using the [FT\_PROG utility from FTDI](http://www.ftdichip.com/Support/Utilities.htm#FT_Prog), invert the polarity of the Rx line (click screenshot to enlarge) and program the new configuration to the device (by selecting "Devices" -> "Program" or simply pressing Ctrl-P). After this, unplug and re-plug the USB end of the FTDI cable for the change to take effect.
+Then, using the [FT\_PROG utility from FTDI](https://www.ftdichip.com/Support/Utilities.htm#FT_PROG), invert the polarity of the Rx line (click screenshot to enlarge) and program the new configuration to the device (by selecting "Devices" -> "Program" or simply pressing Ctrl-P). After this, unplug and re-plug the USB end of the FTDI cable for the change to take effect.
 
-![![](http://alum.wpi.edu/~colinb/images/ft_prog_tn.png)](http://alum.wpi.edu/~colinb/images/ft_prog.png)
+![FT_PROG screenshot](https://colinbourassa.github.io/car_stuff/images/ft_prog.png)
 
 If you're using Linux, you can [use the ft232r\_prog utility](ModifyFTDIFirmwareWithLinux.md) instead of the Windows-only FT\_PROG utility.
 
@@ -38,11 +38,11 @@ In most vehicles, the connector is mated to a grounding plug (i.e. the mating ha
 
 The TTS connector pin numbers in the table above are only important if you've managed to find a mating connector and want to wire it to match the existing TTS connector in the vehicle. The pins in the vehicle side are numbered like so:
 
-![http://alum.wpi.edu/~colinb/images/14cux_tts_data_link_connector_vehicle-side.png](http://alum.wpi.edu/~colinb/images/14cux_tts_data_link_connector_vehicle-side.png)
+![14CUX TTS Data Link Connector](https://colinbourassa.github.io/car_stuff/images/14cux_tts_data_link_connector_vehicle-side.png)
 
 If you **are** using a TTS connector on the FTDI cable, the back of the connector shell will look like the photo below when it's wired correctly. Note the 390Ω resistor between pins 4 and 5 (click photo to enlarge):
 
-![![](http://alum.wpi.edu/~colinb/images/ftdi_with_tts_rear_tn.jpg)](http://alum.wpi.edu/~colinb/images/ftdi_with_tts_rear.jpg)
+![FTDI cable with TTS connector](https://colinbourassa.github.io/car_stuff/images/ftdi_with_tts_rear.jpg)
 
 That's it. The cable should now allow this software to communicate with the 14CUX.
 
@@ -50,7 +50,7 @@ That's it. The cable should now allow this software to communicate with the 14CU
 
 This section explains the reasons behind the unusual signalling characteristics of the 14CUX serial port. The output from the microprocessor (MPU) in the 14CUX's ECU looks like this:
 
-![http://alum.wpi.edu/~colinb/images/14cux_serial_schematic.png](http://alum.wpi.edu/~colinb/images/14cux_serial_schematic.png)
+!(https://colinbourassa.github.io/car_stuff/images/14cux_serial_schematic.png)
 
 The Q10 transistor acts like a switch. When the signal from the MPU is high (5V), the switch is ON and the low side of `R150` is shunted to ground, so Pin 9 is zero volts. When the MPU signal goes low, the switch is OFF and the low side of `R150` is pulled up, so Pin 9 goes to 12V. This transistor circuit is designed to buffer and protect the MPU signal, but it also inverts and changes the voltage level. This is why the FTDI USB device must have its RxD signal inverted (to match the 14CUX's inverted TxD.) However, because the FTDI converter is a 5V device, the 12V signal from the ECU must be attenuated with an external resistor to prevent damage. I've found that the 5V signal from the FTDI converter is sufficient to drive the RxD line in the 14CUX.
 
